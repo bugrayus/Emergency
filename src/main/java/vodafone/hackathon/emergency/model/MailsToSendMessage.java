@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Getter
@@ -17,4 +18,6 @@ import javax.persistence.EntityListeners;
 @EntityListeners(AuditingEntityListener.class)
 public class MailsToSendMessage extends BaseModel {
     private String mail;
+    @ManyToOne
+    private User user;
 }

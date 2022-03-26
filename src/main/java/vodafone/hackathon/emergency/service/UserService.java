@@ -30,6 +30,8 @@ public class UserService {
         User user = mapper.map(requestModel, User.class);
         if (requestModel.getPassword() != null)
             user.setPassword(passwordEncoder.encode(requestModel.getPassword()));
+        else
+            user.setPassword(passwordEncoder.encode(requestModel.getMail()));
         userRepository.save(user);
         return true;
     }
@@ -61,6 +63,4 @@ public class UserService {
         userRepository.save(user);
         return true;
     }
-
-
 }
