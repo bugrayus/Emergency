@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vodafone.hackathon.emergency.core.model.ApiResponse;
+import vodafone.hackathon.emergency.model.request.CreateMailToSendMessageRequestModel;
 import vodafone.hackathon.emergency.model.request.UpdateUserRequestModel;
 import vodafone.hackathon.emergency.model.response.UserResponseModel;
 import vodafone.hackathon.emergency.service.UserService;
@@ -16,6 +17,8 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+
+
 
     @GetMapping("/id/{id}")
     public ResponseEntity<ApiResponse<UserResponseModel>> findUserById(@PathVariable int id) {
