@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 public class UserResponseModel {
-    private Long id;
-    private String mail;
-    private List<MailsToSendMessage> mailsToSendMessage;
+    Long id;
+    String mail;
+    List<MailsToSendMessage> mailsToSendMessage;
 }

@@ -6,9 +6,10 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.validation.constraints.Email;
+import java.math.BigDecimal;
 
 @Entity
 @Getter
@@ -16,10 +17,9 @@ import javax.validation.constraints.Email;
 @ToString
 @RequiredArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Emergency extends BaseModel {
-    private String name;
-    private String info;
-    @Email
-    private String emergencyMail;
-    private String mailContent;
+public class SafeZone extends BaseModel{
+    @Column(precision = 7,scale = 5)
+    private BigDecimal longitude;
+    @Column(precision = 7,scale = 5)
+    private BigDecimal latitudes;
 }

@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -31,9 +30,9 @@ public class AuthenticationService {
     public String login(LoginRequestModel requestModel) {
         UsernamePasswordAuthenticationToken authenticationToken;
         if (requestModel.getPassword() != null)
-            authenticationToken = new UsernamePasswordAuthenticationToken(requestModel.getUsername(), requestModel.getPassword());
+            authenticationToken = new UsernamePasswordAuthenticationToken(requestModel.getMail(), requestModel.getPassword());
         else {
-            authenticationToken = new UsernamePasswordAuthenticationToken(requestModel.getUsername(), requestModel.getUsername());
+            authenticationToken = new UsernamePasswordAuthenticationToken(requestModel.getMail(), requestModel.getMail());
         }
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
