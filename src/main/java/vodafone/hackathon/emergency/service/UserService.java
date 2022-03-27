@@ -44,7 +44,14 @@ public class UserService {
 
     public List<UserResponseModel> findUsers() {
         List<User> users = userRepository.findAll();
-        return users.stream().map(x -> mapper.map(x, UserResponseModel.class)).collect(Collectors.toList());
+        return users
+                .stream()
+                .map(x -> mapper.map(x, UserResponseModel.class))
+                .collect(Collectors.toList());
+//        return users
+//                .stream()
+//                .map(x -> mapper.map(x, UserResponseModel.class))
+//                .collect(Collectors.toList());
     }
 
     public boolean deleteUser(long id) {

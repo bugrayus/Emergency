@@ -5,10 +5,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vodafone.hackathon.emergency.core.model.ApiResponse;
 import vodafone.hackathon.emergency.model.request.CreateEmergencyRequestModel;
+import vodafone.hackathon.emergency.model.request.SendEmergencyMessageRequestModel;
 import vodafone.hackathon.emergency.model.request.UpdateEmergencyRequestModel;
 import vodafone.hackathon.emergency.model.response.EmergencyResponseModel;
 import vodafone.hackathon.emergency.service.EmergencyService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -18,9 +20,16 @@ public class EmergencyController {
     private final EmergencyService emergencyService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<Boolean>> createEmergency(@RequestBody CreateEmergencyRequestModel requestModel) {
+    public ResponseEntity<ApiResponse<Boolean>> createEmergency(@RequestBody @Valid CreateEmergencyRequestModel requestModel) {
         return ResponseEntity.ok(ApiResponse.of(
                 emergencyService.createEmergency(requestModel)
+        ));
+    }
+
+    @PostMapping("/emergency")
+    public ResponseEntity<ApiResponse<Boolean>> sendEmergencyMessage(@RequestBody SendEmergencyMessageRequestModel sendEmergencyMessageRequestModel) {
+        return ResponseEntity.ok(ApiResponse.of(
+                emergencyService.sendEmergencyMessage(sendEmergencyMessageRequestModel)
         ));
     }
 
