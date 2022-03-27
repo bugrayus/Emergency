@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import vodafone.hackathon.emergency.model.Emergency;
+import vodafone.hackathon.emergency.model.MailsToSendMessage;
+import vodafone.hackathon.emergency.model.User;
 import vodafone.hackathon.emergency.model.request.CreateEmergencyRequestModel;
 import vodafone.hackathon.emergency.model.request.SendEmergencyMessageRequestModel;
 import vodafone.hackathon.emergency.model.request.UpdateEmergencyRequestModel;
@@ -65,11 +67,11 @@ public class EmergencyService {
     public boolean sendEmergencyMessage(SendEmergencyMessageRequestModel sendEmergencyMessageRequestModel) {
         Emergency emergency = emergencyRepository.getById(sendEmergencyMessageRequestModel.getEmergencyId());
         sendMail(emergency.getEmergencyMail(), emergency.getMailContent(), sendEmergencyMessageRequestModel.getLongitude(), sendEmergencyMessageRequestModel.getLatitudes());
-//        User user = authenticationService.getCurrentUser();
-//        List<MailsToSendMessage> mailsToSendMessages = user.getMailsToSendMessage();
-//        for (MailsToSendMessage mailsToSendMessage : mailsToSendMessages) {
-//            sendMail(mailsToSendMessage.getMail(), emergency.getMailContent(), sendEmergencyMessageRequestModel.getLongitude(), sendEmergencyMessageRequestModel.getLatitudes());
-//        }
+        User user = authenticationService.getCurrentUser();
+        List<MailsToSendMessage> mailsToSendMessages = user.getMailsToSendMessage();
+        for (MailsToSendMessage mailsToSendMessage : mailsToSendMessages) {
+            sendMail(mailsToSendMessage.getMail(), emergency.getMailContent(), sendEmergencyMessageRequestModel.getLongitude(), sendEmergencyMessageRequestModel.getLatitudes());
+        }
         return true;
     }
 
